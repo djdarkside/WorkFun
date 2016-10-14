@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -62,7 +63,8 @@ public class MainMenuScreen implements Screen {
         button.setSize(280, 60);
         button.addListener(new ClickListener() {
             public void clicked(InputEvent e, float x, float y) {
-                app.setScreen(app.playScreen);
+                button.addAction(Actions.sequence(Actions.alpha(0f), Actions.parallel(Actions.fadeIn(2f), Actions.moveBy(0, -20))));
+                //app.setScreen(app.playScreen);
             }
         });
 

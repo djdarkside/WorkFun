@@ -13,6 +13,7 @@ import com.djdarkside.workfun.screens.PlayScreen;
 public class Application extends Game {
 	public static final int V_WIDTH = 1280;
     public static final int V_HEIGHT = 720;
+    public static final String TITLE = "Game Time";
 
     public LoadingScreen lScreen;
     public MainMenuScreen mmScreen;
@@ -36,7 +37,7 @@ public class Application extends Game {
 
         lScreen = new LoadingScreen(this);
         mmScreen = new MainMenuScreen(this);
-        playScreen = new PlayScreen();
+        playScreen = new PlayScreen(this);
         this.setScreen(lScreen);
 	}
 

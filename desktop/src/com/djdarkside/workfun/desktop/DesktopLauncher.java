@@ -9,6 +9,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = Application.V_WIDTH;
 		config.height = Application.V_HEIGHT;
+		config.title = Application.TITLE;
 		config.resizable = false;
 		new LwjglApplication(new Application(), config);
 	}
