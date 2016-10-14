@@ -1,43 +1,35 @@
 package com.djdarkside.workfun.screens;
 
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.djdarkside.workfun.Application;
 
 /**
- * Created by design on 10/13/2016.
+ * Created by djdarkside on 10/13/2016.
  */
-public class LoadingScreen implements Screen {
+public class MainMenuScreen implements Screen {
 
     private final Application app;
-    private float progress;
+    private Skin skin;
+    private Stage stage;
 
-    public LoadingScreen (final Application app) {
+    public MainMenuScreen(final Application app) {
         this.app = app;
+        stage = new Stage(new FitViewport(Application.V_WIDTH, Application.V_HEIGHT));
     }
 
     @Override
     public void show() {
-        this.progress = 0f;
-        queueAssets();
-    }
-
-    public void queueAssets() {
-        app.manager.load("s1.png", Texture.class);
-        app.manager.load("skin/uiskin.atlas", TextureAtlas.class);
-    }
-
-    public void update(float delta) {
-        progress = MathUtils.lerp(progress, app.manager.getProgress(), 0.1f);
-        if (app.manager.update() && progress >= app.manager.getProgress() - .01f) {
-            app.setScreen(app.mmScreen);
-        }
+        Gdx.input.setInputProcessor(stage);
+        stage.clear();
+        skin = new Skin();
+        skin.addRegions(app.manager.get("skin/uiskin.atlas", TextureAtlas.class));
+        skin.load(Gdx.files.internal("skin/uiskin.json"));
     }
 
     @Override
@@ -48,8 +40,13 @@ public class LoadingScreen implements Screen {
         update(delta);
 
         app.batch.begin();
-        app.font.draw(app.batch, "Loading", app.V_WIDTH / 2, 50);
+        app.font.draw(app.batch, "Main Menu", app.V_WIDTH / 2, 50);
         app.batch.end();
+
+    }
+
+    private void update(float delta) {
+        stage.act(delta);
     }
 
     @Override
@@ -74,6 +71,6 @@ public class LoadingScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
     }
 }
