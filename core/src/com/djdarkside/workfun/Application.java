@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.djdarkside.workfun.screens.LoadingScreen;
 import com.djdarkside.workfun.screens.MainMenuScreen;
+import com.djdarkside.workfun.screens.PlayScreen;
 
 public class Application extends Game {
 	public static final int V_WIDTH = 1280;
@@ -15,6 +16,7 @@ public class Application extends Game {
 
     public LoadingScreen lScreen;
     public MainMenuScreen mmScreen;
+    public PlayScreen playScreen;
 
     public AssetManager manager;
     public OrthographicCamera cam;
@@ -34,6 +36,7 @@ public class Application extends Game {
 
         lScreen = new LoadingScreen(this);
         mmScreen = new MainMenuScreen(this);
+        playScreen = new PlayScreen();
         this.setScreen(lScreen);
 	}
 
